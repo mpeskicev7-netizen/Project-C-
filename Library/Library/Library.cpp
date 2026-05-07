@@ -37,6 +37,11 @@ using namespace std;
 	  char Choice;
 
 	  while (true) {
-		  cout << "Выберите функцию: \n B - Добавить книгу \n M - Добавить музыку \n F - Добавить фильм";
+		  cout << "Выберите функцию: \n B - Добавить книгу \n M - Добавить музыку \n F - Добавить фильм \n E - Выйти" << endl;
+		  cin >> Choice;
+
+		  if (Choice == 'E' || Choice == 'e') {
+			  break;
+		  }
 	  }
   }
