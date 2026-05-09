@@ -43,5 +43,9 @@ using namespace std;
 		  if (Choice == 'E' || Choice == 'e') {
 			  break;
 		  }
+
+		  if (Choice == 'B' || Choice == 'b') {
+			
+		  }
 	  }
   }
