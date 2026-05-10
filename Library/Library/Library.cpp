@@ -86,6 +86,23 @@ using namespace std;
 			
 			  cout << "Сколько книг добавить? \n";
 			  cin >> count;
+
+			  for (int i = 0; i < count; i++) {
+				  Book b;
+
+				  cout << "\nКнига номер: " << i + 1 << endl;
+				  cout << "Название" << endl;
+
+				  cin.ignore();
+				  getline(cin, b.Name);
+
+				  cout << "Количество страниц: " << endl;
+				  cin >> b.Pages;
+
+				  books.push_back(b);
+			  }
+
+			  SaveToFile(books, musics, movies, filename);
 		  }
 	  }
   }
