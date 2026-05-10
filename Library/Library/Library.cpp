@@ -35,7 +35,9 @@ using namespace std;
 		  return;
 	  }
 
-	  file << books.size() << musics.size() << movies.size() << endl;
+	  file << books.size() << "Книг(а)" << endl;
+	  file << musics.size() << "Песен(я/и)" << endl;
+	  file << movies.size() << "Фильмов(а)" << endl;
 
 	  for (const auto& b : books) {
 		  
