@@ -35,6 +35,9 @@ using namespace std;
 	  setlocale(LC_ALL, "ru");
 
 	  char Choice;
+	  vector<Book> books;
+	  vector<Music> musics;
+	  vector<Movie> movies;
 
 	  while (true) {
 		  cout << "Выберите функцию: \n B - Добавить книгу \n M - Добавить музыку \n F - Добавить фильм \n E - Выйти" << endl;
