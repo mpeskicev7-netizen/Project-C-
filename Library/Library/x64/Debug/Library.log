@@ -1,2 +1,2 @@
 ﻿  Library.cpp
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Library\Library\Library.cpp(39,1): error C4700: использована неинициализированная локальная переменная "n"
+  Library.vcxproj -> C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Library\x64\Debug\Library.exe
