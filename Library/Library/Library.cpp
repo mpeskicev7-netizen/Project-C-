@@ -35,9 +35,9 @@ using namespace std;
 		  return;
 	  }
 
-	  file << books.size() << endl;
-	  file << musics.size() << endl;
-	  file << movies.size() << endl;
+	  file << books.size() << "Книг(а)" << endl;
+	  file << musics.size() << "Песен(я/и)" << endl;
+	  file << movies.size() << "Фильмов(а)" << endl;
 
 	  for (const auto& b : books) {
 		  
@@ -59,56 +59,7 @@ using namespace std;
 	  }
 
 	  file.close();
-	  cout << "Данные сохранены в файл " << filename << endl;
-  }
-
-  void LoadFromFile(vector<Book>& books, vector<Music>& musics, vector<Movie>& movies, const string& filename) {
-	  ifstream file(filename);
-
-	  if (!file.is_open()) {
-		  cout << "Файл не был найден. Будет создан новый" << endl;
-
-		  return;
-	  }
-
-	  books.clear();
-	  musics.clear();
-	  movies.clear();
-
-	  int Bookcount, Musiccount, Moviecount;
-	  file >> Bookcount;
-	  file >> Musiccount;
-	  file >> Moviecount;
-	  file.ignore();
-
-	  for (int i = 0; i < Bookcount; i++) {
-		  Book b;
-		  getline(file, b.Name);
-		  file >> b.Pages;
-		  file.ignore();
-		  books.push_back(b);
-	  }
-
-	  for (int i = 0; i < Musiccount; i++) {
-		  Music m;
-		  getline(file, m.Name);
-		  file >> m.Duration;
-		  file.ignore();
-		  musics.push_back(m);
-	  }
-
-	  for (int i = 0; i < Moviecount; i++) {
-		  Movie f;
-		  getline(file, f.Name);
-		  file >> f.Duration;
-		  file.ignore();
-		  movies.push_back(f);
-	  }
-
-	  file.close();
-	  cout << "Книг добавлено: " << books.size() << endl;
-	  cout << "Песен добавлено: " << musics.size() << endl;
-	  cout << "Фильмов добавлено: " << movies.size() << endl;
+	  cout << "Данные сохранены в файл " << filename;
   }
 
   int main() {
@@ -123,8 +74,6 @@ using namespace std;
 	  vector<Movie> movies;
 
 	  const string filename = "Library.txt";
-
-	  LoadFromFile(books, musics, movies, filename);
 
 
 	  while (true) {
@@ -154,51 +103,8 @@ using namespace std;
 
 				  books.push_back(b);
 			  }
+
+			  SaveToFile(books, musics, movies, filename);
 		  }
-
-		  if (Choice == 'M' || Choice == 'm') {
-
-			  cout << "Сколько песен добавить? \n";
-			  cin >> count;
-
-			  for (int i = 0; i < count; i++) {
-				  Music m;
-
-				  cout << "\n Песня номер: " << i + 1 << endl;
-				  cout << "Название" << endl;
-
-				  cin.ignore();
-				  getline(cin, m.Name);
-
-				  cout << "Длительность(мин): " << endl;
-				  cin >> m.Duration;
-
-				  musics.push_back(m);
-			  }
-		  }
-
-
-		  if (Choice == 'F' || Choice == 'f') {
-
-			  cout << "Сколько фильмов добавить? \n";
-			  cin >> count;
-
-			  for (int i = 0; i < count; i++) {
-				  Movie f;
-
-				  cout << "\n Фильм номер: " << i + 1 << endl;
-				  cout << "Название" << endl;
-
-				  cin.ignore();
-				  getline(cin, f.Name);
-
-				  cout << "Длительность(мин): " << endl;
-				  cin >> f.Duration;
-
-				  movies.push_back(f);
-			  }
-		  }
-
-		  SaveToFile(books, musics, movies, filename);
 	  }
   }
