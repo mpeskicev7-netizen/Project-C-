@@ -7,6 +7,13 @@
 
 using namespace std;
 
+class Item {
+public:
+	string Name;
+	int Pages;
+	int Duration;
+};
+
  class Book {
  public:
 	 string Name;
@@ -26,7 +33,7 @@ using namespace std;
 	 int Duration;
  };
 
-  void SaveToFile(const vector<Book>& books, const vector<Music>& musics, const vector<Movie>& movies, const string& filename) {
+  void SaveToFile(const vector<Item>& items, const string& filename) {
 	  ofstream file(filename);
 
 	  if (!file.is_open()) {
@@ -35,34 +42,19 @@ using namespace std;
 		  return;
 	  }
 
-	  file << books.size() << endl;
-	  file << musics.size() << endl;
-	  file << movies.size() << endl;
+	  file << items.size() << endl;
 
-	  for (const auto& b : books) {
+	  for (const auto& b : items) {
 		  
 		  file << b.Name << endl;
 		  file << b.Pages << endl;
-	  }
-
-
-	  for (const auto& m : musics) {
-
-		  file << m.Name << endl;
-		  file << m.Duration << endl;
-	  }
-
-	  for (const auto& f : movies) {
-
-		  file << f.Name << endl;
-		  file << f.Duration << endl;
 	  }
 
 	  file.close();
 	  cout << "Данные сохранены в файл " << filename << endl;
   }
 
-  void LoadFromFile(vector<Book>& books, vector<Music>& musics, vector<Movie>& movies, const string& filename) {
+  void LoadFromFile(vector<Item>& items, const string& filename) {
 	  ifstream file(filename);
 
 	  if (!file.is_open()) {
@@ -71,9 +63,7 @@ using namespace std;
 		  return;
 	  }
 
-	  books.clear();
-	  musics.clear();
-	  movies.clear();
+	  items.clear();
 
 	  int Bookcount, Musiccount, Moviecount;
 	  file >> Bookcount;
@@ -118,13 +108,11 @@ using namespace std;
 
 	  char Choice;
 	  int count;
-	  vector<Book> books;
-	  vector<Music> musics;
-	  vector<Movie> movies;
+	  vector<Item> items;
 
 	  const string filename = "Library.txt";
 
-	  LoadFromFile(books, musics, movies, filename);
+	  LoadFromFile(items, filename);
 
 
 	  while (true) {
