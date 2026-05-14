@@ -9,21 +9,21 @@ using namespace std;
 
 class Book {
 public:
-	string Name;
-	int Pages;
+	string name;
+	int pages;
 
 };
 
 class Music {
 public:
-	string Name;
-	int Duration;
+	string name;
+	int duration;
 };
 
 class Movie {
 public:
-	string Name;
-	int Duration;
+	string name;
+	int duration;
 };
 
 void SaveToFile(const vector<Book>& books, const vector<Music>& musics, const vector<Movie>& movies, const string& filename) {
@@ -41,21 +41,21 @@ void SaveToFile(const vector<Book>& books, const vector<Music>& musics, const ve
 
 	for (const auto& b : books) {
 
-		file << b.Name << endl;
-		file << b.Pages << endl;
+		file << b.name << endl;
+		file << b.pages << endl;
 	}
 
 
 	for (const auto& m : musics) {
 
-		file << m.Name << endl;
-		file << m.Duration << endl;
+		file << m.name << endl;
+		file << m.duration << endl;
 	}
 
 	for (const auto& f : movies) {
 
-		file << f.Name << endl;
-		file << f.Duration << endl;
+		file << f.name << endl;
+		file << f.duration << endl;
 	}
 
 	file.close();
@@ -83,24 +83,24 @@ void LoadFromFile(vector<Book>& books, vector<Music>& musics, vector<Movie>& mov
 
 	for (int i = 0; i < Bookcount; i++) {
 		Book b;
-		getline(file, b.Name);
-		file >> b.Pages;
+		getline(file, b.name);
+		file >> b.pages;
 		file.ignore();
 		books.push_back(b);
 	}
 
 	for (int i = 0; i < Musiccount; i++) {
 		Music m;
-		getline(file, m.Name);
-		file >> m.Duration;
+		getline(file, m.name);
+		file >> m.duration;
 		file.ignore();
 		musics.push_back(m);
 	}
 
 	for (int i = 0; i < Moviecount; i++) {
 		Movie f;
-		getline(file, f.Name);
-		file >> f.Duration;
+		getline(file, f.name);
+		file >> f.duration;
 		file.ignore();
 		movies.push_back(f);
 	}
@@ -147,10 +147,10 @@ int main() {
 				cout << "Название" << endl;
 
 				cin.ignore();
-				getline(cin, b.Name);
+				getline(cin, b.name);
 
 				cout << "Количество страниц: " << endl;
-				cin >> b.Pages;
+				cin >> b.pages;
 
 				books.push_back(b);
 			}
@@ -168,10 +168,10 @@ int main() {
 				cout << "Название" << endl;
 
 				cin.ignore();
-				getline(cin, m.Name);
+				getline(cin, m.name);
 
 				cout << "Длительность(мин): " << endl;
-				cin >> m.Duration;
+				cin >> m.duration;
 
 				musics.push_back(m);
 			}
@@ -190,10 +190,10 @@ int main() {
 				cout << "Название" << endl;
 
 				cin.ignore();
-				getline(cin, f.Name);
+				getline(cin, f.name);
 
 				cout << "Длительность(мин): " << endl;
-				cin >> f.Duration;
+				cin >> f.duration;
 
 				movies.push_back(f);
 			}
