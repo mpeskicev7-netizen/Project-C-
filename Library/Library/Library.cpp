@@ -3,6 +3,7 @@
 #include <fstream>
 #include<vector>
 #include<windows.h>
+#include <algorithm>
 
 
 using namespace std;
@@ -38,20 +39,22 @@ void SaveToFile(const vector<Book>& books, const vector<Music>& musics, const ve
 	file << books.size() << endl;
 	file << musics.size() << endl;
 	file << movies.size() << endl;
-
+	
+	file << "===КНИГИ " << books.size() << "===" << endl;
 	for (const auto& b : books) {
 
 		file << b.name << endl;
 		file << b.pages << endl;
 	}
 
-
+	file << "===ПЕСНИ " << musics.size() << "===" << endl;
 	for (const auto& m : musics) {
 
 		file << m.name << endl;
 		file << m.duration << endl;
 	}
 
+	file << "===ФИЛЬМЫ " << movies.size() << "===" << endl;
 	for (const auto& f : movies) {
 
 		file << f.name << endl;
@@ -80,7 +83,9 @@ void LoadFromFile(vector<Book>& books, vector<Music>& musics, vector<Movie>& mov
 	file >> Musiccount;
 	file >> Moviecount;
 	file.ignore();
-
+	string skip;
+	
+	getline(file, skip);
 	for (int i = 0; i < Bookcount; i++) {
 		Book b;
 		getline(file, b.name);
@@ -89,6 +94,7 @@ void LoadFromFile(vector<Book>& books, vector<Music>& musics, vector<Movie>& mov
 		books.push_back(b);
 	}
 
+	getline(file, skip);
 	for (int i = 0; i < Musiccount; i++) {
 		Music m;
 		getline(file, m.name);
@@ -97,6 +103,7 @@ void LoadFromFile(vector<Book>& books, vector<Music>& musics, vector<Movie>& mov
 		musics.push_back(m);
 	}
 
+	getline(file, skip);
 	for (int i = 0; i < Moviecount; i++) {
 		Movie f;
 		getline(file, f.name);
@@ -109,6 +116,24 @@ void LoadFromFile(vector<Book>& books, vector<Music>& musics, vector<Movie>& mov
 	cout << "Книг добавлено: " << books.size() << endl;
 	cout << "Песен добавлено: " << musics.size() << endl;
 	cout << "Фильмов добавлено: " << movies.size() << endl;
+}
+
+void Print(vector<Book>& books, vector<Music>& musics, vector<Movie>& movies) {
+
+	cout << "\n===КНИГИ===" << endl;
+	for (const auto& b : books) {
+		cout << "Название: " << b.name << "| Страниц: " << b.pages << endl;
+	}
+
+	cout << "\n===ПЕСНИ===" << endl;
+	for (const auto& m : musics) {
+		cout << "Название: " << m.name << "| Длительность: " << m.duration << endl;
+	}
+
+	cout << "\n===ФИЛЬМЫ===" << endl;
+	for (const auto& f : movies) {
+		cout << "Название: " << f.name << "| Длительность: " << f.duration << endl;
+	}
 }
 
 int main() {
@@ -128,7 +153,7 @@ int main() {
 
 
 	while (true) {
-		cout << "Выберите функцию: \n B - Добавить книгу \n M - Добавить музыку \n F - Добавить фильм \n E - Выйти" << endl;
+		cout << "Выберите функцию: \n B - Добавить книгу \n M - Добавить музыку \n F - Добавить фильм \n P - Вывести в консоль \n E - Выйти" << endl;
 		cin >> Choice;
 
 		if (Choice == 'E' || Choice == 'e') {
@@ -198,6 +223,23 @@ int main() {
 				movies.push_back(f);
 			}
 		}
+
+		if (Choice == 'P' || Choice == 'p') {
+
+			Print(books, musics, movies);
+		}
+
+		sort(books.begin(), books.end(), [](const Book& a, const Book& b) {
+			return a.pages < b.pages;
+			});
+
+		sort(musics.begin(), musics.end(), [](const Music& a, const Music& b) {
+			return a.duration < b.duration;
+			});
+
+		sort(movies.begin(), movies.end(), [](const Movie& a, const Movie& b) {
+			return a.duration < b.duration;
+			});
 
 		SaveToFile(books, musics, movies, filename);
 	}
