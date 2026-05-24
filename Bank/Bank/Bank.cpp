@@ -2,6 +2,7 @@
 #include<fstream>
 #include<vector>
 #include<string>
+#include<windows.h>
 
 using namespace std;
 
@@ -22,6 +23,36 @@ public:
 	void printInfo();
 };
 
+class Bank {
+
+};
+
 void Account::deposit(double amount) {
 
+}
+
+void Account::withdraw(double amount) {
+
+}
+
+void Account::addHistory(string text) {
+
+}
+
+void Account::printInfo() {
+
+}
+
+void SaveToFile() {
+
+}
+
+void LoadFromFile() {
+
+}
+
+int main() {
+	setlocale(LC_ALL, "ru");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
 }
