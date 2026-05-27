@@ -101,7 +101,7 @@ void Bank::printAllAccounts() {
 
 	for (const auto& a : accounts) {
 
-		cout << "Имя: " << a.getName() << "Номер: " << a.getId() << endl;
+		cout << "Имя: " << a.getName() << endl << "Номер: " << a.getId() << endl;
 	}
 }
 
@@ -131,21 +131,31 @@ int main() {
 
 	char choice;
 	double amount;
-	string Inputname, Inputpassword;
+	string name, password;
+	Bank bank;
 
 	while (true) {
 
 		cout << "Выберите операцию: " << endl;
-		cout << "A - авторизация \n";
+		cout << "A - авторизация \nP - Показать аккаунты \nE - Выход \n";
 
 		cin >> choice;
 
 		if (choice == 'A' || choice == 'a') {
 			cout << "Введите имя" << endl;
-			cin >> Inputname;
+			cin >> name;
 			cout << "Введите пароль" << endl;
-			cin >> Inputpassword;
+			cin >> password;
+
+			bank.CreateAccounts(name, password);
 		}
-	
+
+		if (choice == 'P' || choice == 'p') {
+			bank.printAllAccounts();
+		}
+
+		if (choice == 'E' || choice == 'e') {
+			break;
+		}
 	}
 }

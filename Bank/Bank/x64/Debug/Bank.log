@@ -1,12 +1,3 @@
 ﻿  Bank.cpp
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(19,10): error C2061: синтаксическая ошибка: идентификатор "amount"
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(19,2): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(19,2): warning C4183: deposit: отсутствие возвращаемого типа; предполагается функция-член, возвращающая "int"
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(20,11): error C2061: синтаксическая ошибка: идентификатор "amount"
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(20,2): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(20,2): warning C4183: withdraw: отсутствие возвращаемого типа; предполагается функция-член, возвращающая "int"
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(21,13): error C2061: синтаксическая ошибка: идентификатор "text"
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(21,2): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(21,2): warning C4183: addHistory: отсутствие возвращаемого типа; предполагается функция-член, возвращающая "int"
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(22,2): error C4430: отсутствует спецификатор типа - предполагается int. Примечание. C++ не поддерживает int по умолчанию
-C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(22,2): warning C4183: printInfo: отсутствие возвращаемого типа; предполагается функция-член, возвращающая "int"
+C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\Bank\Bank.cpp(133,9): warning C4101: amount: неиспользованная локальная переменная
+  Bank.vcxproj -> C:\Users\Максим\OneDrive\Документы\GitHub\Project-C-\Bank\x64\Debug\Bank.exe
