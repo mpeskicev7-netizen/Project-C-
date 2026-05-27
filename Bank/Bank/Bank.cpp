@@ -1,4 +1,6 @@
 ﻿#include<iostream>
+#include<sstream>
+#include<iomanip>
 #include<fstream>
 #include<vector>
 #include<string>
@@ -26,10 +28,13 @@ public:
 	string getName() const { return name; }
 	double getBalance() const { return balance; }
 	string getPassword() const { return password; }
+	vector<string> getHistory() const { return history; }
 	void deposit(double amount);
 	void withdraw(double amount);
 	void addHistory(string text);
 	void printInfo();
+	void printHistory();
+	void setBalance(double amount) { balance = amount; }
 };
 
 class Bank {
@@ -46,8 +51,8 @@ public:
 	Account* findAccount(int id);
 	Account* findAccount(string name);
 	void printAllAccounts();
-	void SaveToFile();
-	void LoadFromFile();
+	void SaveToFile(const string& filename);
+	void LoadFromFile(const string& filename);
 
 };
 
@@ -59,6 +64,10 @@ void Account::deposit(double amount) {
 	}
 
 	balance += amount;
+	ostringstream oss;
+	oss << fixed << setprecision(2);
+	oss << "Пополнение на: " << amount << " Баланс: " << balance;
+	addHistory(oss.str());
 }
 
 void Account::withdraw(double amount) {
@@ -69,14 +78,30 @@ void Account::withdraw(double amount) {
 	}
 
 	balance -= amount;
+	ostringstream oss;
+	oss << fixed << setprecision(2);
+	oss << "Вывели средств: " << amount << " Баланс: " << balance;
+	addHistory(oss.str());
 }
 
 void Account::addHistory(string text) {
-
+	history.push_back(text);
 }
 
 void Account::printInfo() {
+	cout << "Номер счета: " << id << endl;
+	cout << "Наименование счета: " << name << endl;
+	cout << "Баланс: " << balance << endl;
+}
 
+void Account::printHistory() {
+	if (history.empty()) {
+		cout << "История пуста" << endl;
+		return;
+	}
+	for (const auto& h : history) {
+		cout << h << endl;
+	}
 }
 
 void Bank::CreateAccounts(string name, string password) {
@@ -101,7 +126,7 @@ void Bank::printAllAccounts() {
 
 	for (const auto& a : accounts) {
 
-		cout << "Имя: " << a.getName() << endl << "Номер: " << a.getId() << endl;
+		cout << "Имя: " << a.getName() << endl << "Номер: " << a.getId() << endl << "Баланс: " << a.getBalance() << endl;
 	}
 }
 
@@ -116,12 +141,82 @@ Account* Bank::findAccount(string name) {
 	return nullptr;
 }
 
-void Bank::SaveToFile() {
+void Bank::SaveToFile(const string& filename) {
+	ofstream file(filename);
+
+	if (!file.is_open()) {
+		cout << "Не удалочь открыть файл" << endl;
+
+		return;
+	}
+
+	file << accounts.size() << endl;
+
+	for (const auto a : accounts) {
+
+		file << a.getId() << endl;
+		file << a.getName() << endl;
+		file << a.getPassword() << endl;
+		file << a.getBalance() << endl;
+
+		file << a.getHistory().size() << endl;
+		for (const auto& h : a.getHistory()) {
+			file << h << endl;
+		}
+	}
+
+	file.close();
+	cout << "Данные сохранены в файл: " << filename << endl;
 
 }
 
-void Bank::LoadFromFile() {
+void Bank::LoadFromFile(const string& filename) {
+	ifstream file(filename);
 
+	if (!file.is_open()) {
+		cout << "Файл не был найден, будет создан новый" << endl;
+
+		return;
+	}
+
+	accounts.clear();
+
+	int acc;
+	file >> acc;
+
+	file.ignore();
+
+	for (int i = 0; i < acc; i++) {
+		int id;
+		string name, password;
+		double balance;
+
+		file >> id;
+		file.ignore();
+		getline(file, name);
+		getline(file, password);
+		file >> balance;
+		file.ignore();
+
+		Account a(id, name, password);
+		a.setBalance(balance);
+
+		int historyCount;
+		file >> historyCount;
+
+		file.ignore();
+
+		for (int j = 0; j < historyCount; j++) {
+			string line;
+			getline(file, line);
+			a.addHistory(line);
+		}
+
+		accounts.push_back(a);
+	}
+
+	file.close();
+	cout << "Добавлено новых аккаунтов: " << accounts.size() << endl;
 }
 
 int main() {
@@ -131,15 +226,19 @@ int main() {
 
 	char choice;
 	double amount;
+	const string filename = "Bank.txt";
 	string name, password;
 	Bank bank;
+
+	bank.LoadFromFile(filename);
 
 	while (true) {
 
 		cout << "Выберите операцию: " << endl;
-		cout << "A - авторизация \nP - Показать аккаунты \nE - Выход \n";
+		cout << "A - Добавить счет \nP - Показать аккаунты \nR - Внести депозит \nT - Снять деньги \nI - Данные счета \nH - История операций \nE - Выход \n";
 
 		cin >> choice;
+
 
 		if (choice == 'A' || choice == 'a') {
 			cout << "Введите имя" << endl;
@@ -154,8 +253,87 @@ int main() {
 			bank.printAllAccounts();
 		}
 
+		if (choice == 'R' || choice == 'r') {
+			cout << "Введите имя: ";
+			cin >> name;
+			cout << "Введите пароль: ";
+			cin >> password;
+
+			Account* acc = bank.findAccount(name);
+			if (acc == nullptr) {
+				cout << "Счет не найден" << endl;
+			}
+			else if (acc->getPassword() != password) {
+				cout << "Неверный пароль" << endl;
+			}
+			else {
+				cout << "Введите сумму поплнения: ";
+				cin >> amount;
+				acc->deposit(amount);
+			}
+			
+		}
+
+		if (choice == 'T' || choice == 't') {
+			cout << "Введите имя:";
+			cin >> name;
+			cout << "Введите пароль: ";
+			cin >> password;
+
+			Account* acc = bank.findAccount(name);
+			if (acc == nullptr) {
+				cout << "Счет не найден" << endl;
+			}
+			else if (acc->getPassword() != password) {
+				cout << "Неверный пароль" << endl;
+			}
+			else {
+				cout << "Введите сумму снятия: ";
+				cin >> amount;
+				acc->withdraw(amount);
+			}
+		}
+
+		if (choice == 'I' || choice == 'i') {
+			cout << "Введите имя: ";
+			cin >> name;
+			cout << "Введите пароль: ";
+			cin >> password;
+
+			Account* acc = bank.findAccount(name);
+			if (acc == nullptr) {
+				cout << "Счет не найден" << endl;
+			}
+			else if (acc->getPassword() != password) {
+				cout << "Неверный пароль" << endl;
+			}
+			else {
+				acc->printInfo();
+			}
+		}
+
+		if (choice == 'H' || choice == 'h') {
+			cout << "Введите имя: ";
+			cin >> name;
+			cout << "Введите пароль: ";
+			cin >> password;
+
+			Account* acc = bank.findAccount(name);
+			if (acc == nullptr) {
+				cout << "Счет не найден" << endl;
+			}
+			else if (acc->getPassword() != password) {
+				cout << "Неверный пароль" << endl;
+			}
+			else {
+				acc->printHistory();
+			}
+		}
+
 		if (choice == 'E' || choice == 'e') {
 			break;
 		}
+
+		bank.SaveToFile(filename);
 	}
 }
