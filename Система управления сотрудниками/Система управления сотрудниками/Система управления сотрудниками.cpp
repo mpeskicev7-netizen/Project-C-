@@ -9,7 +9,7 @@ using namespace std;
 class Employee {
 public:
 	string Name;
-	int Salary;  //Расчет ЗП
+	int Salary;  
 };
 
 void SaveToFile(const vector<Employee>& employees, const string& filename) {
@@ -99,15 +99,4 @@ int main() {
 		cout << i + 1 << "." << employees[i].Name;
 		cout << "-" << employees[i].Salary << " руб." << endl;
 	}
-
-	/*Employee First;
-
-	First.Name = "Сергей";
-	First.Salary = 35000;
-
-	Employee Artem;
-
-	Artem.Name = "Артём";
-	Artem.Salary = 355;*/
-
 }
