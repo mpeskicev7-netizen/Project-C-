@@ -27,10 +27,10 @@ public:
 	string getEmail() const { return email; }
 	string getAdress() const { return adress; }
 
-	string setName() const { return name; }
-	string setPhone() const { return phone; }
-	string setEmail() const { return email; }
-	string setAdress() const { return adress; }
+	void setName(string newName) { name = newName; }
+	void setPhone(string newPhone) { phone = newPhone; }
+	void setEmail(string newEmail) {  email = newEmail; }
+	void setAdress(string newAdress) {  adress = newAdress; }
 
 	void printInfo();
 };
