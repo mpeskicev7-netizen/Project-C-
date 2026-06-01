@@ -1,7 +1,13 @@
+.vs/
+*.vsidx
+*.suo
+*.VC.db
+*.backup.json
+*.ipch
 Debug/
 Release/
 x64/
-
+x86/
 *.exe
 *.obj
 *.pdb
