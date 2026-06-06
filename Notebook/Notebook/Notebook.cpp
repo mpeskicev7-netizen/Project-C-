@@ -35,15 +35,28 @@ public:
 	void printInfo();
 };
 
-class ContactBook {
-
-};
-
-void Contact :: printInfo() {
+void Contact::printInfo() {
 	cout << "Имя: " << name << endl;
 	cout << "Номер телефона: " << phone << endl;
 	cout << "Почта: " << email << endl;
 	cout << "Адрес: " << adress << endl;
+}
+
+class ContactBook {
+private:
+	map<string, Contact> contacts;
+
+public:
+	void addContacts(const Contact& contact);
+	void FindByname();
+};
+
+void ContactBook::addContacts(const Contact& contact) {
+	contacts[contact.getName()] = contact;
+}
+
+void ContactBook::FindByname() {
+	
 }
 
 int main() {
