@@ -48,15 +48,22 @@ private:
 
 public:
 	void addContacts(const Contact& contact);
-	void FindByname();
+	void FindByname(string name);
 };
 
 void ContactBook::addContacts(const Contact& contact) {
 	contacts[contact.getName()] = contact;
 }
 
-void ContactBook::FindByname() {
-	
+void ContactBook::FindByname(string name) {
+	auto it = contacts.find(name);
+
+	if (it == contacts.end()) {
+		cout << "Контакт не найден" << endl;
+	}
+	else {
+		it->second.printInfo();
+	}
 }
 
 int main() {
