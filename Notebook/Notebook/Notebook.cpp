@@ -32,10 +32,10 @@ public:
 	void setEmail(string newEmail) {  email = newEmail; }
 	void setAdress(string newAdress) {  adress = newAdress; }
 
-	void printInfo();
+	void printInfo() const;
 };
 
-void Contact::printInfo() {
+void Contact::printInfo() const {
 	cout << "Имя: " << name << endl;
 	cout << "Номер телефона: " << phone << endl;
 	cout << "Почта: " << email << endl;
@@ -49,6 +49,9 @@ private:
 public:
 	void addContacts(const Contact& contact);
 	void FindByname(string name);
+	void FindByPhone(string phone);
+	void editContacts();
+	void deleteContact();
 };
 
 void ContactBook::addContacts(const Contact& contact) {
@@ -64,6 +67,25 @@ void ContactBook::FindByname(string name) {
 	else {
 		it->second.printInfo();
 	}
+}
+
+void ContactBook::FindByPhone(string phone) {
+	auto it = contacts.find(phone);
+
+	if (it == contacts.end()) {
+		cout << "Контакт не найден" << endl;
+    }
+	else {
+		it->second.printInfo();
+	}
+}
+
+void ContactBook::editContacts() {
+
+}
+
+void ContactBook::deleteContact() {
+
 }
 
 int main() {
