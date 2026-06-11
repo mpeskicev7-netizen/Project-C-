@@ -51,7 +51,7 @@ public:
 	void FindByname(string name);
 	void FindByPhone(string phone);
 	void editContacts();
-	void deleteContact();
+	void deleteContact(string name);
 };
 
 void ContactBook::addContacts(const Contact& contact) {
@@ -69,23 +69,33 @@ void ContactBook::FindByname(string name) {
 	}
 }
 
-void ContactBook::FindByPhone(string phone) {
+void ContactBook::FindByPhone(string phone) { 
 	auto it = contacts.find(phone);
 
-	if (it == contacts.end()) {
-		cout << "Контакт не найден" << endl;
-    }
-	else {
-		it->second.printInfo();
+	for (const auto& pair : contacts) {
+		if (pair.second.getPhone() == phone) {
+			pair.second.printInfo();
+			return;
+		}
 	}
+
+	cout << "Контакт не найден" << endl;
 }
 
 void ContactBook::editContacts() {
 
 }
 
-void ContactBook::deleteContact() {
+void ContactBook::deleteContact(string name) {
+	auto it = contacts.find(name);
 
+	if (it != contacts.end()) {
+		contacts.erase(it);
+		cout << "Контакт удален" << endl;
+	}
+	else {
+		cout << "Контакт не найден" << endl;
+	}
 }
 
 int main() {
