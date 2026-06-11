@@ -50,7 +50,7 @@ public:
 	void addContacts(const Contact& contact);
 	void FindByname(string name);
 	void FindByPhone(string phone);
-	void editContacts();
+	void editContacts(string name, string newPhone, string newEmail, string newAdress);
 	void deleteContact(string name);
 };
 
@@ -82,8 +82,19 @@ void ContactBook::FindByPhone(string phone) {
 	cout << "Контакт не найден" << endl;
 }
 
-void ContactBook::editContacts() {
+void ContactBook::editContacts(string name, string newPhone, string newEmail, string newAdress) {
+	auto it = contacts.find(name);
 
+	if (it != contacts.end()) {
+		it->second.setPhone(newPhone);
+		it->second.setEmail(newEmail);
+		it->second.setAdress(newAdress);
+
+		cout << "Контакт обновлен" << endl;
+	}
+	else {
+		cout << "Контакт не найден" << endl;
+	}
 }
 
 void ContactBook::deleteContact(string name) {
