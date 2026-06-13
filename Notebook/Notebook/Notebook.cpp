@@ -52,6 +52,7 @@ public:
 	void FindByPhone(string phone);
 	void editContacts(string name, string newPhone, string newEmail, string newAdress);
 	void deleteContact(string name);
+	void printAll();
 };
 
 void ContactBook::addContacts(const Contact& contact) {
@@ -106,6 +107,19 @@ void ContactBook::deleteContact(string name) {
 	}
 	else {
 		cout << "Контакт не найден" << endl;
+	}
+}
+
+void ContactBook::printAll() {
+	if (contacts.empty()) {
+		cout << "Книга контактов пуста" << endl;
+
+		return;
+	}
+
+	for (const auto& pair : contacts) {
+		pair.second.printInfo();
+		cout << "---" << endl;
 	}
 }
 
