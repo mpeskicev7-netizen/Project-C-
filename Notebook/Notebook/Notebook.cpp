@@ -53,6 +53,8 @@ public:
 	void editContacts(string name, string newPhone, string newEmail, string newAdress);
 	void deleteContact(string name);
 	void printAll();
+	void SaveToFile(const string& filename);
+	void LoadFromFile(const string& filename);
 };
 
 void ContactBook::addContacts(const Contact& contact) {
@@ -121,6 +123,56 @@ void ContactBook::printAll() {
 		pair.second.printInfo();
 		cout << "---" << endl;
 	}
+}
+
+void ContactBook::SaveToFile(const string& filename) {
+	ofstream file(filename);
+
+	if (!file.is_open()) {
+		cout << "Не удалось открыть файл" << endl;
+
+		return;
+	}
+
+	file << contacts.size() << endl;
+	for (const auto& pair : contacts) {
+		file << pair.second.getName() << endl;
+		file << pair.second.getPhone() << endl;
+		file << pair.second.getEmail() << endl;
+		file << pair.second.getAdress() << endl;
+	}
+
+	file.close();
+	cout << "Данные сохранены в файл " << filename << endl;
+}
+
+void ContactBook::LoadFromFile(const string& filename) {
+	ifstream file(filename);
+
+	if (!file.is_open()) {
+		cout << "Файл не был найден, будет создан новый" << endl;
+
+		return;
+	}
+
+	contacts.clear();
+
+	int count;
+	file >> count;
+	file.ignore();
+
+	for (int i = 0; i < count; i++) {
+		string name, phone, email, adress;
+		getline(file, name);
+		getline(file, phone);
+		getline(file, email);
+		getline(file, adress);
+		Contact c(name, phone, email, adress);
+		contacts[name] = c;
+	}
+
+	file.close();
+	cout << "Добавлено новых контактов: " << contacts.size() << endl;
 }
 
 int main() {
