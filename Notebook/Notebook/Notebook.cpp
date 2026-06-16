@@ -22,6 +22,7 @@ public:
 		this->email = email;
 		this->adress = adress;
 	}
+	Contact() : name(""), phone(""), email(""), adress("") {}
 	string getName() const { return name; }
 	string getPhone() const { return phone; }
 	string getEmail() const { return email; }
@@ -179,4 +180,38 @@ int main() {
 	setlocale(LC_ALL, "ru");
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
+
+	const string filename = "Notebook.txt";
+
+	char choice;
+	string name, phone, email, adress;
+	ContactBook book;
+
+	book.LoadFromFile(filename);
+
+	while (true) {
+		cout << "1 - Добавить контакт \n0 - Выйти\n";
+		cin >> choice;
+
+		if (choice == '1') {
+			cout << "Введите имя:" << endl;
+			cin >> name;
+			cout << "Введите телефон:" << endl;
+			cin >> phone;
+			cout << "Введите почту:" << endl;
+			cin >> email;
+			cout << "Введите адрес:" << endl;
+			cin >> adress;
+
+			Contact c (name, phone, email, adress);
+
+			book.addContacts(c);
+		}
+
+		if (choice == '0') {
+			break;
+		}
+
+		book.SaveToFile(filename);
+	}
 }
