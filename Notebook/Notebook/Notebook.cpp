@@ -184,13 +184,13 @@ int main() {
 	const string filename = "Notebook.txt";
 
 	char choice;
-	string name, phone, email, adress;
+	string name, phone, email, adress, newPhone, newEmail, newAdress;
 	ContactBook book;
 
 	book.LoadFromFile(filename);
 
 	while (true) {
-		cout << "1 - Добавить контакт \n2 - Поиск контакта по имени \n3 - Найти по номеру \n0 - Выйти\n";
+		cout << "1 - Добавить контакт \n2 - Поиск контакта по имени \n3 - Найти по номеру \n4 - Редактирвать контакт \n5 - Удалить контакт \n6 - Вывести весь список \n0 - Выйти\n";
 
 		cin >> choice;
 
@@ -221,6 +221,30 @@ int main() {
 			cin >> phone;
 
 			book.FindByPhone(phone);
+		}
+
+		if (choice == '4') {
+			cout << "Введите имя, редактируемого контакта:" << endl;
+			cin >> name;
+			cout << "Введите новый номер:" << endl;
+			cin >> newPhone;
+			cout << "Введите новую почту:" << endl;
+			cin >> newEmail;
+			cout << "Введите новый адрес:" << endl;
+			cin >> newAdress;
+
+			book.editContacts(name, newPhone, newEmail, newAdress);
+		}
+
+		if (choice == '5') {
+			cout << "Введите имя контакта, который нужно удалить:" << endl;
+			cin >> name;
+
+			book.deleteContact(name);
+		}
+
+		if (choice == '6') {
+			book.printAll();
 		}
 
 		if (choice == '0') {
