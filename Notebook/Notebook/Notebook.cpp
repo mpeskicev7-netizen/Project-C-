@@ -190,7 +190,8 @@ int main() {
 	book.LoadFromFile(filename);
 
 	while (true) {
-		cout << "1 - Добавить контакт \n0 - Выйти\n";
+		cout << "1 - Добавить контакт \n2 - Поиск контакта по имени \n3 - Найти по номеру \n0 - Выйти\n";
+
 		cin >> choice;
 
 		if (choice == '1') {
@@ -206,6 +207,20 @@ int main() {
 			Contact c (name, phone, email, adress);
 
 			book.addContacts(c);
+		}
+
+		if (choice == '2') {
+			cout << "Введите имя:" << endl;
+			cin >> name;
+
+			book.FindByname(name);
+		}
+
+		if (choice == '3') {
+			cout << "Введите телефон:" << endl;
+			cin >> phone;
+
+			book.FindByPhone(phone);
 		}
 
 		if (choice == '0') {
