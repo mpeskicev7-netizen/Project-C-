@@ -1,0 +1,72 @@
+D:\Пескичев 0482-03\lab1\lab1\obj\Debug\lab1.Form1.resources
+D:\Пескичев 0482-03\lab1\lab1\obj\Debug\lab1.Properties.Resources.resources
+D:\Пескичев 0482-03\lab1\lab1\obj\Debug\lab1.csproj.GenerateResource.cache
+D:\Пескичев 0482-03\lab1\lab1\obj\Debug\lab1.csproj.CoreCompileInputs.cache
+D:\Пескичев 0482-03\lab1\lab1\bin\Debug\lab1.exe.config
+D:\Пескичев 0482-03\lab1\lab1\bin\Debug\lab1.exe
+D:\Пескичев 0482-03\lab1\lab1\bin\Debug\lab1.pdb
+D:\Пескичев 0482-03\lab1\lab1\obj\Debug\lab1.exe
+D:\Пескичев 0482-03\lab1\lab1\obj\Debug\lab1.pdb
+D:\Пескичев 0482-03\lab1\lab1\obj\Debug\lab1.csproj.AssemblyReference.cache
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\bin\Debug\lab1.exe.config
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\bin\Debug\lab1.exe
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\bin\Debug\lab1.pdb
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\obj\Debug\lab1.csproj.AssemblyReference.cache
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\obj\Debug\lab1.Form1.resources
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\obj\Debug\lab1.Properties.Resources.resources
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\obj\Debug\lab1.csproj.GenerateResource.cache
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\obj\Debug\lab1.csproj.CoreCompileInputs.cache
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\obj\Debug\lab1.exe
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\obj\Debug\lab1.pdb
+C:\Users\Student\Desktop\Пескичев 0482-03\lab\lab1\obj\Debug\lab1.Form2.resources
+C:\Users\Максим\Desktop\lab\lab1\bin\Debug\lab1.exe.config
+C:\Users\Максим\Desktop\lab\lab1\bin\Debug\lab1.exe
+C:\Users\Максим\Desktop\lab\lab1\bin\Debug\lab1.pdb
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.csproj.AssemblyReference.cache
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.Form1.resources
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.Form2.resources
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.Properties.Resources.resources
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.csproj.GenerateResource.cache
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.csproj.CoreCompileInputs.cache
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.exe
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.pdb
+C:\Users\Максим\Desktop\lab\lab1\obj\Debug\lab1.exe.config
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.csproj.AssemblyReference.cache
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.exe.config
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.Form1.resources
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.Form2.resources
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.LineWidthDialog.resources
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.Properties.Resources.resources
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.csproj.GenerateResource.cache
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.csproj.CoreCompileInputs.cache
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.exe
+C:\Users\Максим\Desktop\lab 5\lab1\obj\Debug\lab1.pdb
+C:\Users\Максим\Desktop\lab 5\lab1\bin\Debug\lab1.exe.config
+C:\Users\Максим\Desktop\lab 5\lab1\bin\Debug\lab1.exe
+C:\Users\Максим\Desktop\lab 5\lab1\bin\Debug\lab1.pdb
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.csproj.AssemblyReference.cache
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.exe.config
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.Form1.resources
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.Form2.resources
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.LineWidthDialog.resources
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.Properties.Resources.resources
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.csproj.GenerateResource.cache
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.csproj.CoreCompileInputs.cache
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.exe
+C:\Users\Максим\Desktop\lab 7\lab1\obj\Debug\lab1.pdb
+C:\Users\Максим\Desktop\lab 7\lab1\bin\Debug\lab1.exe.config
+C:\Users\Максим\Desktop\lab 7\lab1\bin\Debug\lab1.exe
+C:\Users\Максим\Desktop\lab 7\lab1\bin\Debug\lab1.pdb
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.csproj.AssemblyReference.cache
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.exe.config
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.Form1.resources
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.Form2.resources
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.LineWidthDialog.resources
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.Properties.Resources.resources
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.csproj.GenerateResource.cache
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.csproj.CoreCompileInputs.cache
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.exe
+C:\Users\Максим\Desktop\lab 8\lab1\obj\Debug\lab1.pdb
+C:\Users\Максим\Desktop\lab 8\lab1\bin\Debug\lab1.exe.config
+C:\Users\Максим\Desktop\lab 8\lab1\bin\Debug\lab1.exe
+C:\Users\Максим\Desktop\lab 8\lab1\bin\Debug\lab1.pdb
