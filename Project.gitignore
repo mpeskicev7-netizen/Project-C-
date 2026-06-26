@@ -11,3 +11,7 @@ x86/
 *.exe
 *.obj
 *.pdb
+blog.db
+__pycache__/
+*.pyc
+.env

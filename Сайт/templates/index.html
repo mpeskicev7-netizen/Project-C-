@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Вези Кайфуй — прокат электровелосипедов в Пскове
+{% endblock %}
+
+{% block body %}
+
+<section class="hero">
+	<div class="container hero__inner">
+		<div>
+			<span class="hero__eyebrow">Псков · круглый год</span>
+			<h1>Город — <em>быстрее</em> и без пробок</h1>
+			<p>Электровелосипеды в аренду на день, неделю или месяц.</p>
+			<div class="hero__actions">
+				<a href="#bikes" class="btn btn--primary">Выбрать велосипед</a>
+			</div>
+		</div>
+		<div class="hero__visual">
+			<span>фото велосипеда</span>
+		</div>
+	</div>
+</section>
+
+<section class="section" id="bikes">
+	<div class="container">
+		<div class="section__head">
+			<span class="section__number">Парк</span>
+			<h2>Велосипеды</h2>
+		</div>
+	<div class="bikes-grid">
+	{% for bike in bikes %}
+	<div class="bike-card">
+		<div class="bike-card__image">фото</div>
+		<div class="bike-card__body">
+			<div class="bike-card__name">{{ bike.name }}</div>
+			<div class="bike-card__desc">{{ bike.description }}</div>
+			<div class="bike-card__price-row">
+				<div class="bike-card__price">{{ bike.price_week }} ₽<span> / неделя</span></div>
+				<div class="bike-card__details">
+					<ul>
+						<li>Мощность: 500 Вт</li>
+						<li>Максимальная скорость: 60 км/ч</li>
+						<li>Запас хода: до 80 км</li>
+						<li>Максимальная нагрузка: 200 кг</li>
+						<li>Время зарядки: ~6 ч</li>
+				    </ul>
+				</div>
+				<div class="bike-card__quantity">
+	         <span class="bike-card__quantity-label">в наличии:</span>
+	         <span class="bike-card__quantity-number">{{ bike.quantity }}</span>
+             </div>
+				<a href="#" class="btn btn--accent">Взять</a>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+	</div>
+</section>
+
+{% endblock %}
