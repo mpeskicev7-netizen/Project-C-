@@ -17,7 +17,9 @@
 			</div>
 		</div>
 		<div class="hero__visual">
-			<span>фото велосипеда</span>
+			<img id="current-photo"
+     		src="{{ url_for('static', filename='images/Logo.jpg') }}"
+     		alt="Monster M2">
 		</div>
 	</div>
 </section>
@@ -31,7 +33,11 @@
 	<div class="bikes-grid">
 	{% for bike in bikes %}
 	<div class="bike-card">
-		<div class="bike-card__image">фото</div>
+		<div class="bike-card__image">
+			<img id="current-photo"
+     		src="{{ url_for('static', filename='images/photo1.jpg') }}"
+     		alt="Monster M2">
+		</div>
 		<div class="bike-card__body">
 			<div class="bike-card__name">{{ bike.name }}</div>
 			<div class="bike-card__desc">{{ bike.description }}</div>
@@ -57,6 +63,21 @@
 	{% endfor %}
 </div>
 	</div>
+</section>
+<section id="contacts" style="background: #f8f9fa; padding: 40px 10px; text-align: center; margin-top: 50px;">
+    <h2>Контакты</h2>
+    <a href="tel:+79319020631" style="font-size: 16px; font-weight: bold; color: #ffd60a; text-decoration: none;">
+        +7(931) 902-06-31
+    </a>
+    <p style="margin-top: 10px; color: #666;">
+        Звоните нам по любым вопросам
+    </p>
+	<a href="https://vk.ru/club239717620" target="_blank" rel="noopener noreferrer" style="font-size: 16px; font-weight: bold; color: #666; text-decoration: none;">
+        Наша группа в ВК
+    </a>
+	 <p style="margin-top: 10px; color: #666;">
+        Вступайте в нашу группу в ВК
+    </p>
 </section>
 
 {% endblock %}

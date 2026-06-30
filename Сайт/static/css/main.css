@@ -167,20 +167,19 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background:
-		repeating-linear-gradient(
-			90deg,
-			var(--color-accent) 0px,
-			var(--color-accent) 40px,
-			transparent 40px,
-			transparent 70px
-		);
 	background-size: 110px 6px;
 	background-repeat: repeat-x;
 	background-position: center;
 	background-color: #fafafa;
 	position: relative;
 	overflow: hidden;
+}
+
+.hero__visual img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
 }
 
 .hero__visual span {
@@ -298,9 +297,8 @@ body {
 	display: none;
 }
 
-.bike-card:hover .bike-card__details {
+.bike-card--open .bike-card__details {
 	display: block;
-	font-size: 15px;
 }
 
 .bike-card__image {
@@ -593,4 +591,300 @@ button:focus-visible {
 .auth-greeting {
 	font-size: 14px;
 	color: var(--color-text-muted);
+}
+
+.table-wrapper {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 16px;
+}
+
+.bike-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.bike-table thead {
+    background: var(--color-text);
+    color: #ffffff;
+}
+
+.bike-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bike-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-line);
+    vertical-align: middle;
+}
+
+.bike-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.bike-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.bike-table tbody tr:hover {
+    background: #f8f8f8;
+}
+
+.bike-id {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.bike-name {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.bike-price {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.bike-price small {
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quantity-control .btn-qty {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--color-line);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+}
+
+.quantity-control .btn-qty:hover {
+    border-color: var(--color-text);
+    transform: scale(1.05);
+}
+
+.quantity-control .btn-qty:active {
+    transform: scale(0.95);
+}
+
+.quantity-control .btn-qty:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.quantity-control .btn-qty--minus {
+    color: var(--color-text-muted);
+}
+
+.quantity-control .btn-qty--minus:hover:not(:disabled) {
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+.quantity-control .btn-qty--plus {
+    color: var(--color-text);
+}
+
+.quantity-control .btn-qty--plus:hover {
+    border-color: #22a65e;
+    color: #22a65e;
+}
+
+.quantity-number {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 36px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-line);
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+}
+
+.btn-icon:hover {
+    border-color: var(--color-text);
+    color: var(--color-text);
+    transform: translateY(-1px);
+}
+
+.btn-icon--edit:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+}
+
+.btn-icon--delete:hover {
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--color-text-muted);
+}
+
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+
+.empty-state h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.table-stats {
+    display: flex;
+    gap: 32px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--color-line);
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.table-stats strong {
+    color: var(--color-text);
+}
+
+@media (max-width: 700px) {
+    .bike-table {
+        font-size: 14px;
+    }
+
+    .bike-table th,
+    .bike-table td {
+        padding: 12px 14px;
+    }
+
+    .quantity-number {
+        font-size: 17px;
+        min-width: 28px;
+    }
+
+    .quantity-control .btn-qty {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .table-stats {
+        flex-direction: column;
+        gap: 8px;
+        padding: 14px 16px;
+    }
+
+    @media (max-width: 480px) {
+        .bike-table th:nth-child(2),
+        .bike-table td:nth-child(2) {
+            display: none; /* скрываем ID */
+        }
+    }
+}
+
+@keyframes qtyPop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
+.quantity-number.pop {
+    animation: qtyPop 0.25s ease;
+}
+
+.message {
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-line);
+    font-size: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.message--success {
+    background: #f0faf4;
+    border-color: #b7e0c1;
+    color: #1a6e3a;
+}
+
+.message--error {
+    background: #fdf0ef;
+    border-color: #f5c2c2;
+    color: #a13d3d;
+}
+
+.message--info {
+    background: #f4f7fb;
+    border-color: #c5d5e8;
+    color: #2c5282;
+}
+
+.message .close-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.message .close-btn:hover {
+    color: var(--color-text);
 }

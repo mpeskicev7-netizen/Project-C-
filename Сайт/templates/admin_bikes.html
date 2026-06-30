@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Вези Кайфуй — прокат электровелосипедов в Пскове
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="message message--{{ category }}">
+                    {{ message }}
+                    <button class="close-btn" onclick="this.parentElement.remove()">×</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="table-wrapper">
+        <table class="bike-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Стоимость</th>
+                    <th>Количество</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if bikes %}
+                    {% for bike in bikes %}
+                    <tr class="bike-row" data-bike-id="{{ bike.id }}">
+                        <td><span class="bike-id">#{{ bike.id }}</span></td>
+                        <td><span class="bike-name">{{ bike.name }}</span></td>
+                        <td>
+                            <span class="bike-price">
+                                {{ bike.price_week }} <small>₽</small>
+                            </span>
+                        </td>
+                        <td>
+                            <div class="quantity-control">
+                                <button class="btn-qty btn-qty--minus" 
+                                        data-bike-id="{{ bike.id }}"
+                                        data-action="decrease"
+                                        {% if bike.quantity <= 0 %}disabled{% endif %}>
+                                    −
+                                </button>
+                                <span class="quantity-number" id="qty-{{ bike.id }}">
+                                    {{ bike.quantity }}
+                                </span>
+                                <button class="btn-qty btn-qty--plus" 
+                                        data-bike-id="{{ bike.id }}"
+                                        data-action="increase">
+                                    +
+                                </button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <a href="{{ url_for('edit_bike', bike_id=bike.id) }}" 
+                                   class="btn-icon btn-icon--edit" 
+                                   title="Редактировать">
+                                    ✎
+                                </a>
+                                <form action="{{ url_for('delete_bike', bike_id=bike.id) }}" 
+                                      method="POST" 
+                                      style="display: inline;"
+                                      onsubmit="return confirm('Удалить велосипед \'{{ bike.name }}\'?')">
+                                    <button type="submit" class="btn-icon btn-icon--delete" title="Удалить">
+                                        ✕
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5">
+                            <div class="empty-state">
+                                <div class="empty-icon">🚲</div>
+                                <h3>Велосипедов пока нет</h3>
+                                <p>Добавьте первый велосипед в каталог</p>
+                                <a href="{{ url_for('add_bike') }}" class="btn btn--primary">
+                                    + Добавить велосипед
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        
+        {% if bikes %}
+        <div class="table-stats">
+            <span>Всего моделей: <strong>{{ bikes|length }}</strong></span>
+            <span>Общее количество: <strong>{{ bikes|sum(attribute='quantity') }}</strong></span>
+            <span>Средняя цена: <strong>
+                {{ (bikes|sum(attribute='price_week') / bikes|length)|round(0)|int }} ₽/нед
+            </strong></span>
+        </div>
+        {% endif %}
+    </div>
+
+    <div style="margin-top: 24px; text-align: right;">
+        <a href="{{ url_for('add_bike') }}" class="btn btn--accent">
+            + Добавить велосипед
+        </a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Обработка кликов по кнопкам количества
+    document.querySelectorAll('.btn-qty').forEach(function(btn) {
+        btn.addEventListener('click', function(event) {
+            event.stopPropagation(); // Чтобы не срабатывал клик по карточке
+            const bikeId = this.dataset.bikeId;
+            const action = this.dataset.action;
+            if (bikeId && action) {
+                updateQuantity(bikeId, action);
+            }
+        });
+    });
+});
+
+function updateQuantity(bikeId, action) {
+    const qtySpan = document.getElementById(`qty-${bikeId}`);
+    const row = document.querySelector(`.bike-row[data-bike-id="${bikeId}"]`);
+    const minusBtn = row ? row.querySelector('.btn-qty--minus') : null;
+    const plusBtn = row ? row.querySelector('.btn-qty--plus') : null;
+    
+    // Блокируем кнопки
+    if (minusBtn) minusBtn.disabled = true;
+    if (plusBtn) plusBtn.disabled = true;
+    
+    fetch('/update_quantity', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            bike_id: parseInt(bikeId),
+            action: action
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            qtySpan.textContent = data.new_quantity;
+            
+            qtySpan.classList.remove('pop');
+            void qtySpan.offsetWidth;
+            qtySpan.classList.add('pop');
+            
+            if (minusBtn) {
+                minusBtn.disabled = data.new_quantity <= 0;
+            }
+            
+            showMessage(`Количество обновлено: ${data.new_quantity}`, 'success');
+        } else {
+            showMessage(data.error || 'Произошла ошибка', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('Ошибка соединения с сервером', 'error');
+    })
+    .finally(() => {
+        if (minusBtn) minusBtn.disabled = false;
+        if (plusBtn) plusBtn.disabled = false;
+        // Снова проверяем условие для минус
+        if (minusBtn && parseInt(qtySpan.textContent) <= 0) {
+            minusBtn.disabled = true;
+        }
+    });
+}
+
+function showMessage(text, type = 'info') {
+    const container = document.querySelector('.container');
+    if (!container) return;
+    
+    const oldMessages = container.querySelectorAll('.message');
+    oldMessages.forEach(msg => msg.remove());
+    
+    const msg = document.createElement('div');
+    msg.className = `message message--${type}`;
+    msg.innerHTML = `
+        ${text}
+        <button class="close-btn" onclick="this.parentElement.remove()">×</button>
+    `;
+    container.prepend(msg);
+    
+    setTimeout(() => {
+        if (msg.parentElement) {
+            msg.remove();
+        }
+    }, 3000);
+}
+</script>
+
+{% endblock %}
