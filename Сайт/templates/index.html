@@ -6,6 +6,19 @@
 
 {% block body %}
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="container">
+            {% for category, message in messages %}
+                <div class="message message--{{ category }}">
+                    {{ message }}
+                    <button class="close-btn" onclick="this.parentElement.remove()">×</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
 <section class="hero">
 	<div class="container hero__inner">
 		<div>
@@ -56,7 +69,7 @@
 	         <span class="bike-card__quantity-label">в наличии:</span>
 	         <span class="bike-card__quantity-number">{{ bike.quantity }}</span>
              </div>
-				<a href="#" class="btn btn--accent">Взять</a>
+				<a href="{{ url_for('order', bike_id=bike.id) }}" class="btn btn--accent">Взять</a>
 			</div>
 		</div>
 	</div>

@@ -104,6 +104,41 @@
         {% endif %}
     </div>
 
+    <div class="table-wrapper">
+        <table class="bike-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Номер</th>
+                    <th>Цена</th>
+                    <th>Срок аренды</th>
+                    <th>Время заявки</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if orders %}
+                    {% for order in orders %}
+                        <tr class="order-row" data-order-id="{{ order.id }}">
+                            <td><span class="order-id">#{{ order.id }}</span></td>
+                            <td>{{ order.customer_name }}</td>
+                            <td>
+                                <a href="tel:{{ order.customer_phone }}">
+                                    {{ order.customer_phone }}
+                                </a>
+                            </td>
+                            <td>{{order.total_price}} ₽</td>
+                            <td>{{ order.weeks }} нед.</td>
+                            <td>{{ order.date.strftime('%d.%m.%Y %H:%M') }}</td>
+                            <td>{{ order.status }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
     <div style="margin-top: 24px; text-align: right;">
         <a href="{{ url_for('add_bike') }}" class="btn btn--accent">
             + Добавить велосипед

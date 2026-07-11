@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 load_dotenv()
 kaif = Flask(__name__)
@@ -59,6 +60,22 @@ def admin_required(f):
     return decorated_function
 
 
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    bike_id = db.Column(db.Integer, db.ForeignKey('bikes.id'))
+    customer_name = db.Column(db.String(100), unique = False, nullable = False)
+    customer_phone = db.Column(db.String(100), unique = False, nullable = False)
+    weeks = db.Column(db.Integer, nullable = False)
+    total_price = db.Column(db.Integer, nullable = False)
+    date = db.Column(db.DateTime, default = datetime.utcnow)
+    status = db.Column(db.String(50), default = 'new', nullable = False)
+
+    bike = db.relationship('Bikes', backref='orders')
+
+    def __repr__(self):
+        return '<Order %r>' % self.id
+
+
 @kaif.route('/')
 def index():
     bikes = Bikes.query.all()
@@ -108,12 +125,41 @@ def login():
     return render_template('login.html')
 
 
-@kaif.route('/admin/bikes')
+@kaif.route('/order/<int:bike_id>', methods = ['GET', 'POST'])
+@login_required
+def order(bike_id):
+    bike = Bikes.query.get_or_404(bike_id)
+
+    if request.method == 'POST':
+        customer_name = request.form.get('name')
+        customer_phone = request.form.get('phone')
+        weeks = int(request.form.get('weeks', 1))
+
+        new_order = Order(
+            bike_id = bike_id,
+            customer_name = customer_name,
+            customer_phone = customer_phone,
+            weeks = weeks,
+            total_price = bike.price_week * weeks
+        )
+        if bike.quantity > 0:
+            bike.quantity -= 1
+        db.session.add(new_order)
+        db.session.commit()
+
+        flash(f'Спасибо, {customer_name}! Ваш заказ на велосипед "{bike.name}" принят. Мы свяжемся с вами по номеру {customer_phone} в течение 15 минут.', 'success')
+        return redirect(url_for('index'))
+    
+    return render_template('order.html', bike=bike)
+
+
+@kaif.route('/admin/panel')
 @login_required
 @admin_required
 def admin_bikes():
-	bikes = Bikes.query.all()
-	return render_template('admin_bikes.html', bikes=bikes)
+    bikes = Bikes.query.all()
+    orders = Order.query.all()
+    return render_template('admin_bikes.html', bikes=bikes, orders=orders)
 
 
 @kaif.route('/add', methods=['GET', 'POST'])
@@ -175,7 +221,6 @@ def update_quantity():
             return jsonify({'error': 'Количество не может быть меньше 0'}), 400
     
     db.session.commit()
-    
     return jsonify({
         'success': True,
         'new_quantity': bike.quantity,
@@ -223,4 +268,4 @@ def logout():
 	return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    kaif.run(debug=True, host="0.0.0.0")
+    kaif.run(debug=False, host="0.0.0.0")
