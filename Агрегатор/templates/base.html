@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <a href="/" class="logo">Грузо<span>Линк</span></a>
+            <nav>
+                <ul class="nav">
+                    <li><a href="#calc">Рассчитать</a></li>
+                    <li><a href="#how">Как работает</a></li>
+                    <li><a href="#guarantee">Гарантии</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                {% if current_user.is_authenticated %}
+                    <span class="auth-greeting">Привет, {{ current_user.name }}</span>
+                    <a href="{{ url_for('orders') }}" class="btn btn--secondary">Мои заказы</a>
+                    <a href="{{ url_for('logout') }}" class="btn btn--secondary">Выйти</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn btn--secondary">Войти</a>
+                    <a href="{{ url_for('register') }}" class="btn btn--primary">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    {% block body %}{% endblock %}
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <span class="footer__copy">© 2026 ГрузоЛинк — сеть транспортных компаний</span>
+            <div class="footer__links">
+                <a href="#">Оферта</a>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
