@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Оформление заказа — {{ bike.name }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="order-page">
+        <a href="{{ url_for('index') }}" class="order-back">← Вернуться к каталогу</a>
+        
+        <h1 class="order-title">Оформление заказа</h1>
+        
+        <div class="order-bike-info">
+            <div class="order-bike-info__header">
+                <h2>{{ bike.name }}</h2>
+                <span class="order-bike-info__price">{{ bike.price_week }} ₽ <small>/ неделя</small></span>
+            </div>
+            <p class="order-bike-info__desc">{{ bike.description }}</p>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message message--{{ category }}">
+                        {{ message }}
+                        <button class="close-btn" onclick="this.parentElement.remove()">×</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" class="order-form">
+            <div class="form-group">
+                <label for="name">Ваше имя *</label>
+                <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Номер телефона *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="weeks">Срок аренды (недель) *</label>
+                <input type="number" id="weeks" name="weeks" min="1" value="1" required>
+            </div>
+            
+            <div class="order-total">
+                <div class="order-total__row">
+                    <span>Цена за неделю:</span>
+                    <strong>{{ bike.price_week }} ₽</strong>
+                </div>
+                <div class="order-total__row">
+                    <span>Срок аренды:</span>
+                    <strong id="weeks-display">1 нед.</strong>
+                </div>
+                <div class="order-total__row order-total__row--final">
+                    <span>Итого к оплате:</span>
+                    <strong id="total-price">{{ bike.price_week }} ₽</strong>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn--accent order-submit">Подтвердить заказ</button>
+            
+            <p class="order-note">После оформления с вами свяжется наш менеджер для согласования деталей выдачи.</p>
+        </form>
+    </div>
+</div>
+{% endblock %}

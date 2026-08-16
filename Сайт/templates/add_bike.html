@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавление велосипеда — Вези Кайфуй
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div style="max-width: 600px; margin: 40px auto;">
+        <h2 style="margin-bottom: 30px;">➕ Добавление нового велосипеда</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message message--{{ category }}">
+                        {{ message }}
+                        <button class="close-btn" onclick="this.parentElement.remove()">×</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" action="{{ url_for('add_bike') }}">
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="name" style="display: block; font-weight: 600; margin-bottom: 6px;">
+                    Название велосипеда <span style="color: red;">*</span>
+                </label>
+                <input type="text" 
+                       id="name" 
+                       name="name" 
+                       placeholder="Например: Горный велосипед XC-3000"
+                       style="width: 100%; padding: 10px 14px; border: 1px solid #e0e0e0; border-radius: 4px; font-size: 16px;"
+                       required>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="description" style="display: block; font-weight: 600; margin-bottom: 6px;">
+                    Описание <span style="color: red;">*</span>
+                </label>
+                <textarea id="description" 
+                          name="description" 
+                          rows="4"
+                          placeholder="Опишите характеристики велосипеда..."
+                          style="width: 100%; padding: 10px 14px; border: 1px solid #e0e0e0; border-radius: 4px; font-size: 16px;"
+                          required></textarea>
+                <small style="color: #6b6b6b; font-size: 12px;">Максимум 400 символов</small>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="price_week" style="display: block; font-weight: 600; margin-bottom: 6px;">
+                        Цена за неделю (₽) <span style="color: red;">*</span>
+                    </label>
+                    <input type="number" 
+                           id="price_week" 
+                           name="price_week" 
+                           placeholder="5000"
+                           min="1"
+                           style="width: 100%; padding: 10px 14px; border: 1px solid #e0e0e0; border-radius: 4px; font-size: 16px;"
+                           required>
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="quantity" style="display: block; font-weight: 600; margin-bottom: 6px;">
+                        Количество
+                    </label>
+                    <input type="number" 
+                           id="quantity" 
+                           name="quantity" 
+                           placeholder="1"
+                           min="0"
+                           value="1"
+                           style="width: 100%; padding: 10px 14px; border: 1px solid #e0e0e0; border-radius: 4px; font-size: 16px;">
+                    <small style="color: #6b6b6b; font-size: 12px;">Доступное количество для аренды</small>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 12px; margin-top: 30px;">
+                <button type="submit" 
+                        style="background: #ffd60a; color: #1a1a1a; padding: 12px 30px; border: none; border-radius: 4px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s;">
+                    ✅ Добавить велосипед
+                </button>
+                <a href="{{ url_for('admin_bikes') }}" 
+                   style="background: #e0e0e0; color: #1a1a1a; padding: 12px 30px; border: none; border-radius: 4px; font-size: 16px; font-weight: 600; text-decoration: none; display: inline-block;">
+                    ↩️ Отмена
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('image').addEventListener('input', function() {
+    const preview = document.getElementById('imagePreview');
+    const img = preview.querySelector('img');
+    const url = this.value;
+    
+    if (url) {
+        img.src = url;
+        preview.style.display = 'block';
+        img.onerror = function() {
+            preview.style.display = 'none';
+        };
+    } else {
+        preview.style.display = 'none';
+    }
+});
+</script>
+
+{% endblock %}
